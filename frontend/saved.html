@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Your saved BlogSphere stories."
+    >
+
+    <title>Saved Stories | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ✦ BlogSphere
+        </a>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="dashboard.html"
+                class="outline"
+            >
+                ← Dashboard
+            </a>
+
+            <a
+                href="explore.html"
+                class="outline"
+            >
+                Explore
+            </a>
+
+            <button
+                type="button"
+                class="logout"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="page">
+
+        <section class="page-title">
+
+            <span class="eyebrow">
+                YOUR PERSONAL COLLECTION
+            </span>
+
+            <h1>
+                Saved Stories 🔖
+            </h1>
+
+            <p>
+                Keep the stories you love and come back
+                to them whenever you want.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             SAVED BLOGS
+             ================================================= -->
+
+        <section>
+
+            <div
+                id="savedBlogs"
+                class="blog-grid"
+            >
+
+                <div class="loading">
+                    Loading your saved stories...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             EXPLORE CTA
+             ================================================= -->
+
+        <section
+            class="cta"
+            style="margin-top:60px;"
+        >
+
+            <div>
+
+                <span class="eyebrow">
+                    DISCOVER MORE
+                </span>
+
+                <h2>
+                    Looking for something new?
+                </h2>
+
+                <p>
+                    Explore more stories and save the ones
+                    that inspire you.
+                </p>
+
+            </div>
+
+
+            <a
+                href="explore.html"
+                class="btn white"
+            >
+                Explore Stories →
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            <b>
+                ✦ BlogSphere
+            </b>
+
+            <span>
+                — Where every story finds its audience.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 BlogSphere
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create and publish your BlogSphere story."
+    >
+
+    <title>Create Blog | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ✦ BlogSphere
+        </a>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="dashboard.html"
+                class="outline"
+            >
+                ← Dashboard
+            </a>
+
+            <button
+                type="button"
+                class="logout"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN EDITOR
+         ===================================================== -->
+
+    <main class="editor-page">
+
+        <!-- Page Heading -->
+
+        <section class="page-title">
+
+            <span class="eyebrow">
+                CREATE SOMETHING AMAZING
+            </span>
+
+            <h1>
+                Tell Your Story ✨
+            </h1>
+
+            <p>
+                Turn your ideas into something people
+                can discover.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             BLOG FORM
+             ================================================= -->
+
+        <form
+            id="blogForm"
+            class="editor"
+        >
+
+            <!-- Blog Title -->
+
+            <label>
+
+                Blog Title *
+
+                <input
+                    type="text"
+                    id="blogTitle"
+                    name="title"
+                    placeholder="Give your story a great title..."
+                    maxlength="150"
+                    required
+                >
+
+            </label>
+
+
+            <!-- Category + Tags -->
+
+            <div class="two">
+
+                <label>
+
+                    Category *
+
+                    <select
+                        id="blogCategory"
+                        name="category"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Technology">
+                            Technology
+                        </option>
+
+                        <option value="AI & ML">
+                            AI & ML
+                        </option>
+
+                        <option value="Education">
+                            Education
+                        </option>
+
+                        <option value="Career">
+                            Career
+                        </option>
+
+                        <option value="College Life">
+                            College Life
+                        </option>
+
+                        <option value="Projects">
+                            Projects
+                        </option>
+
+                        <option value="Self Growth">
+                            Self Growth
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+
+                    Tags
+
+                    <input
+                        type="text"
+                        id="blogTags"
+                        name="tags"
+                        placeholder="AI, coding, student"
+                        maxlength="250"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <!-- Cover Image -->
+
+            <label>
+
+                Cover Image
+
+                <input
+                    type="file"
+                    id="blogImage"
+                    name="image"
+                    accept="image/png,image/jpeg,image/webp,image/jpg"
+                >
+
+                <small
+                    style="
+                        display:block;
+                        margin-top:6px;
+                        color:#687086;
+                    "
+                >
+                    JPG, PNG or WEBP. Recommended size:
+                    1200 × 630px.
+                </small>
+
+            </label>
+
+
+            <!-- Image Preview -->
+
+            <div
+                id="imagePreview"
+                style="
+                    display:none;
+                    margin-bottom:20px;
+                    border-radius:16px;
+                    overflow:hidden;
+                    border:1px solid #e5e7ef;
+                "
+            >
+
+                <img
+                    id="previewImage"
+                    src=""
+                    alt="Cover preview"
+                    style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                    "
+                >
+
+            </div>
+
+
+            <!-- Story -->
+
+            <label>
+
+                Your Story *
+
+                <textarea
+                    id="blogContent"
+                    name="content"
+                    rows="18"
+                    maxlength="30000"
+                    placeholder="Start writing your story here..."
+                    required
+                ></textarea>
+
+                <small
+                    id="contentCounter"
+                    style="
+                        display:block;
+                        margin-top:6px;
+                        color:#687086;
+                        text-align:right;
+                    "
+                >
+                    0 / 30000
+                </small>
+
+            </label>
+
+
+            <!-- Actions -->
+
+            <div class="editor-actions">
+
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="saveDraft()"
+                >
+                    💾 Save Draft
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="clearDraft()"
+                >
+                    Clear
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn primary"
+                >
+                    Publish Blog 🚀
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            <b>
+                ✦ BlogSphere
+            </b>
+
+            <span>
+                — Where every story finds its audience.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 BlogSphere
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC FEATURES
+         ===================================================== -->
+
+    <script>
+
+        /*
+        -----------------------------------------------------
+        IMAGE PREVIEW
+        -----------------------------------------------------
+        */
+
+        const blogImage =
+            document.getElementById(
+                "blogImage"
+            );
+
+        const imagePreview =
+            document.getElementById(
+                "imagePreview"
+            );
+
+        const previewImage =
+            document.getElementById(
+                "previewImage"
+            );
+
+
+        if (blogImage) {
+
+            blogImage.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files[0];
+
+
+                    if (!file) {
+
+                        imagePreview.style.display =
+                            "none";
+
+                        previewImage.src =
+                            "";
+
+                        return;
+                    }
+
+
+                    /*
+                    Validate image size
+                    */
+
+                    if (
+                        file.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        alert(
+                            "Image size must be less than 5 MB."
+                        );
+
+                        this.value = "";
+
+                        imagePreview.style.display =
+                            "none";
+
+                        return;
+                    }
+
+
+                    /*
+                    Preview
+                    */
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            previewImage.src =
+                                event.target.result;
+
+                            imagePreview.style.display =
+                                "block";
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+        }
+
+
+        /*
+        -----------------------------------------------------
+        CONTENT CHARACTER COUNTER
+        -----------------------------------------------------
+        */
+
+        const content =
+            document.getElementById(
+                "blogContent"
+            );
+
+        const counter =
+            document.getElementById(
+                "contentCounter"
+            );
+
+
+        if (content && counter) {
+
+            content.addEventListener(
+                "input",
+                function () {
+
+                    counter.textContent =
+                        `${this.value.length} / 30000`;
+
+                }
+            );
+
+        }
+
+
+        /*
+        -----------------------------------------------------
+        CLEAR DRAFT
+        -----------------------------------------------------
+        */
+
+        function clearDraft() {
+
+            const confirmed =
+                confirm(
+                    "Clear all entered content?"
+                );
+
+
+            if (!confirmed) {
+                return;
+            }
+
+
+            const form =
+                document.getElementById(
+                    "blogForm"
+                );
+
+
+            if (form) {
+                form.reset();
+            }
+
+
+            localStorage.removeItem(
+                "blogsphereDraft"
+            );
+
+
+            if (imagePreview) {
+
+                imagePreview.style.display =
+                    "none";
+
+                previewImage.src =
+                    "";
+            }
+
+
+            if (counter) {
+
+                counter.textContent =
+                    "0 / 30000";
+            }
+        }
+
+    </script>
+
+
+    <!-- =====================================================
+         MAIN JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

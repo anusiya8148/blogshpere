@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Edit your BlogSphere story."
+    >
+
+    <title>Edit Blog | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ✦ BlogSphere
+        </a>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="dashboard.html"
+                class="outline"
+            >
+                ← Dashboard
+            </a>
+
+            <button
+                type="button"
+                class="logout"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN
+         ===================================================== -->
+
+    <main class="editor-page">
+
+        <section class="page-title">
+
+            <span class="eyebrow">
+                UPDATE YOUR STORY
+            </span>
+
+            <h1>
+                Edit Blog ✨
+            </h1>
+
+            <p>
+                Improve your story and publish the latest version.
+            </p>
+
+        </section>
+
+
+        <!-- =================================================
+             EDIT FORM
+             ================================================= -->
+
+        <form
+            id="editBlogForm"
+            class="editor"
+        >
+
+            <!-- Hidden Blog ID -->
+
+            <input
+                type="hidden"
+                id="editBlogId"
+            >
+
+
+            <!-- Blog Title -->
+
+            <label>
+
+                Blog Title *
+
+                <input
+                    type="text"
+                    id="editTitle"
+                    placeholder="Give your story a great title..."
+                    maxlength="150"
+                    required
+                >
+
+            </label>
+
+
+            <!-- Category + Tags -->
+
+            <div class="two">
+
+                <label>
+
+                    Category *
+
+                    <select
+                        id="editCategory"
+                        required
+                    >
+
+                        <option value="">
+                            Select category
+                        </option>
+
+                        <option value="Technology">
+                            Technology
+                        </option>
+
+                        <option value="AI & ML">
+                            AI & ML
+                        </option>
+
+                        <option value="Education">
+                            Education
+                        </option>
+
+                        <option value="Career">
+                            Career
+                        </option>
+
+                        <option value="College Life">
+                            College Life
+                        </option>
+
+                        <option value="Projects">
+                            Projects
+                        </option>
+
+                        <option value="Self Growth">
+                            Self Growth
+                        </option>
+
+                    </select>
+
+                </label>
+
+
+                <label>
+
+                    Tags
+
+                    <input
+                        type="text"
+                        id="editTags"
+                        placeholder="AI, coding, student"
+                        maxlength="250"
+                    >
+
+                </label>
+
+            </div>
+
+
+            <!-- Current Cover Image -->
+
+            <div
+                id="currentImageContainer"
+                style="
+                    display:none;
+                    margin-bottom:20px;
+                "
+            >
+
+                <label>
+                    Current Cover Image
+                </label>
+
+                <div
+                    style="
+                        overflow:hidden;
+                        border:1px solid #e5e7ef;
+                        border-radius:16px;
+                    "
+                >
+
+                    <img
+                        id="currentImage"
+                        src=""
+                        alt="Current blog cover"
+                        style="
+                            width:100%;
+                            max-height:350px;
+                            object-fit:cover;
+                        "
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- New Cover Image -->
+
+            <label>
+
+                Replace Cover Image
+
+                <input
+                    type="file"
+                    id="editBlogImage"
+                    accept="image/png,image/jpeg,image/webp,image/jpg"
+                >
+
+                <small
+                    style="
+                        display:block;
+                        margin-top:6px;
+                        color:#687086;
+                    "
+                >
+                    Leave empty to keep the current image.
+                </small>
+
+            </label>
+
+
+            <!-- New Image Preview -->
+
+            <div
+                id="editImagePreview"
+                style="
+                    display:none;
+                    margin-bottom:20px;
+                    border-radius:16px;
+                    overflow:hidden;
+                    border:1px solid #e5e7ef;
+                "
+            >
+
+                <img
+                    id="editPreviewImage"
+                    src=""
+                    alt="New cover preview"
+                    style="
+                        width:100%;
+                        max-height:350px;
+                        object-fit:cover;
+                    "
+                >
+
+            </div>
+
+
+            <!-- Story -->
+
+            <label>
+
+                Your Story *
+
+                <textarea
+                    id="editContent"
+                    rows="18"
+                    maxlength="30000"
+                    placeholder="Write your story..."
+                    required
+                ></textarea>
+
+                <small
+                    id="editContentCounter"
+                    style="
+                        display:block;
+                        margin-top:6px;
+                        color:#687086;
+                        text-align:right;
+                    "
+                >
+                    0 / 30000
+                </small>
+
+            </label>
+
+
+            <!-- Actions -->
+
+            <div class="editor-actions">
+
+                <button
+                    type="button"
+                    class="btn danger"
+                    onclick="deleteCurrentBlog()"
+                >
+                    🗑️ Delete Blog
+                </button>
+
+
+                <button
+                    type="button"
+                    class="btn secondary"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    Cancel
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn primary"
+                >
+                    Update Blog 🚀
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            <b>
+                ✦ BlogSphere
+            </b>
+
+            <span>
+                — Where every story finds its audience.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 BlogSphere
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         PAGE-SPECIFIC JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        /*
+        -----------------------------------------------------
+        NEW IMAGE PREVIEW
+        -----------------------------------------------------
+        */
+
+        const editImage =
+            document.getElementById(
+                "editBlogImage"
+            );
+
+        const editImagePreview =
+            document.getElementById(
+                "editImagePreview"
+            );
+
+        const editPreviewImage =
+            document.getElementById(
+                "editPreviewImage"
+            );
+
+
+        if (editImage) {
+
+            editImage.addEventListener(
+                "change",
+                function () {
+
+                    const file =
+                        this.files[0];
+
+
+                    if (!file) {
+
+                        editImagePreview.style.display =
+                            "none";
+
+                        editPreviewImage.src =
+                            "";
+
+                        return;
+                    }
+
+
+                    /*
+                    Maximum 5 MB
+                    */
+
+                    if (
+                        file.size >
+                        5 * 1024 * 1024
+                    ) {
+
+                        alert(
+                            "Image size must be less than 5 MB."
+                        );
+
+                        this.value = "";
+
+                        editImagePreview.style.display =
+                            "none";
+
+                        return;
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function (event) {
+
+                            editPreviewImage.src =
+                                event.target.result;
+
+                            editImagePreview.style.display =
+                                "block";
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+        }
+
+
+        /*
+        -----------------------------------------------------
+        CONTENT COUNTER
+        -----------------------------------------------------
+        */
+
+        const editContent =
+            document.getElementById(
+                "editContent"
+            );
+
+        const editCounter =
+            document.getElementById(
+                "editContentCounter"
+            );
+
+
+        if (
+            editContent &&
+            editCounter
+        ) {
+
+            editContent.addEventListener(
+                "input",
+                function () {
+
+                    editCounter.textContent =
+                        `${this.value.length} / 30000`;
+
+                }
+            );
+
+        }
+
+    </script>
+
+
+    <!-- MAIN JAVASCRIPT -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

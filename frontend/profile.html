@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Manage your BlogSphere creator profile."
+    >
+
+    <title>My Profile | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ✦ BlogSphere
+        </a>
+
+
+        <div class="nav-actions">
+
+            <a
+                href="dashboard.html"
+                class="outline"
+            >
+                ← Dashboard
+            </a>
+
+            <a
+                href="explore.html"
+                class="outline"
+            >
+                Explore
+            </a>
+
+            <button
+                type="button"
+                class="logout"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         PROFILE
+         ===================================================== -->
+
+    <main class="profile-page">
+
+        <section class="profile-card">
+
+            <!-- Avatar -->
+
+            <div
+                class="profile-avatar"
+                id="profileAvatar"
+            >
+                U
+            </div>
+
+
+            <!-- Name -->
+
+            <h1 id="profileName">
+                Loading...
+            </h1>
+
+
+            <!-- Username -->
+
+            <p id="profileUsername">
+                @username
+            </p>
+
+
+            <!-- Email -->
+
+            <p
+                id="profileEmail"
+                style="
+                    margin-top:5px;
+                    font-size:0.9rem;
+                "
+            >
+            </p>
+
+
+            <!-- Bio -->
+
+            <p
+                id="profileBio"
+                style="
+                    max-width:500px;
+                    margin:18px auto 0;
+                "
+            >
+                Loading profile...
+            </p>
+
+
+            <!-- =================================================
+                 PROFILE STATISTICS
+                 ================================================= -->
+
+            <div class="profile-stats">
+
+                <div>
+
+                    <b id="profileBlogs">
+                        0
+                    </b>
+
+                    <span>
+                        Blogs
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b id="profileViews">
+                        0
+                    </b>
+
+                    <span>
+                        Views
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <b id="profileLikes">
+                        0
+                    </b>
+
+                    <span>
+                        Likes
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 PROFILE ACTIONS
+                 ================================================= -->
+
+            <div
+                style="
+                    display:flex;
+                    justify-content:center;
+                    flex-wrap:wrap;
+                    gap:10px;
+                    margin-top:30px;
+                "
+            >
+
+                <a
+                    href="dashboard.html"
+                    class="btn primary"
+                >
+                    📊 Dashboard
+                </a>
+
+
+                <a
+                    href="create-blog.html"
+                    class="btn secondary"
+                >
+                    ✍ Create Blog
+                </a>
+
+
+                <a
+                    href="saved.html"
+                    class="btn secondary"
+                >
+                    🔖 Saved Stories
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            <b>
+                ✦ BlogSphere
+            </b>
+
+            <span>
+                — Where every story finds its audience.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 BlogSphere
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

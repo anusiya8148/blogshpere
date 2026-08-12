@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Login to your BlogSphere account."
+    >
+
+    <title>Login | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <div class="auth-wrap">
+
+            <!-- Logo -->
+
+            <a
+                href="index.html"
+                class="auth-logo"
+            >
+                ✦ BlogSphere
+            </a>
+
+
+            <!-- Login Card -->
+
+            <section class="auth-card">
+
+                <div class="auth-head">
+
+                    <div class="auth-icon">
+                        🔐
+                    </div>
+
+                    <h1>
+                        Welcome Back
+                    </h1>
+
+                    <p>
+                        Login to continue your BlogSphere journey.
+                    </p>
+
+                </div>
+
+
+                <!-- Login Form -->
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+                    <!-- Email -->
+
+                    <label>
+
+                        Email Address
+
+                        <input
+                            type="email"
+                            id="loginEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Password -->
+
+                    <label>
+
+                        Password
+
+                        <input
+                            type="password"
+                            id="loginPassword"
+                            name="password"
+                            placeholder="Enter your password"
+                            autocomplete="current-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="btn primary full"
+                    >
+                        Login →
+                    </button>
+
+                </form>
+
+
+                <!-- Register -->
+
+                <div class="switch">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create Account
+                    </a>
+
+                </div>
+
+
+                <!-- Back -->
+
+                <a
+                    href="index.html"
+                    class="back"
+                >
+                    ← Back to BlogSphere
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

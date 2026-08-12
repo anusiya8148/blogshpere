@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Your BlogSphere creator dashboard."
+    >
+
+    <title>Dashboard | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================================
+         NAVIGATION
+         ===================================================== -->
+
+    <header class="dashboard-nav">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            ✦ BlogSphere
+        </a>
+
+
+        <div
+            class="nav-actions"
+        >
+
+            <a
+                href="index.html"
+                class="outline"
+            >
+                Home
+            </a>
+
+            <a
+                href="explore.html"
+                class="outline"
+            >
+                Explore
+            </a>
+
+            <a
+                href="profile.html"
+                class="outline"
+            >
+                Profile
+            </a>
+
+            <button
+                type="button"
+                class="logout"
+                onclick="logout()"
+            >
+                Logout
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DASHBOARD
+         ===================================================== -->
+
+    <main class="dashboard">
+
+        <!-- Welcome -->
+
+        <section class="dashboard-hero">
+
+            <div>
+
+                <span class="eyebrow">
+                    CREATOR DASHBOARD
+                </span>
+
+                <h1>
+                    Welcome back,
+                    <span id="dashboardName">
+                        Creator
+                    </span>
+                    👋
+                </h1>
+
+                <p>
+                    Manage your stories and see how your
+                    content is performing.
+                </p>
+
+            </div>
+
+
+            <a
+                href="create-blog.html"
+                class="btn primary"
+            >
+                ✍ Create New Blog
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             STATISTICS
+             ================================================= -->
+
+        <section class="stats">
+
+            <div>
+
+                <span>
+                    📝
+                </span>
+
+                <small>
+                    Published Blogs
+                </small>
+
+                <b id="statBlogs">
+                    0
+                </b>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    👁
+                </span>
+
+                <small>
+                    Total Views
+                </small>
+
+                <b id="statViews">
+                    0
+                </b>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    ❤️
+                </span>
+
+                <small>
+                    Total Likes
+                </small>
+
+                <b id="statLikes">
+                    0
+                </b>
+
+            </div>
+
+
+            <div>
+
+                <span>
+                    💬
+                </span>
+
+                <small>
+                    Total Comments
+                </small>
+
+                <b id="statComments">
+                    0
+                </b>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             QUICK ACTIONS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="section-head">
+
+                <span class="eyebrow">
+                    QUICK ACTIONS
+                </span>
+
+                <h2>
+                    Manage Your BlogSphere
+                </h2>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <a
+                    href="create-blog.html"
+                    class="feature-card"
+                >
+
+                    <div class="icon">
+                        ✍️
+                    </div>
+
+                    <h3>
+                        Write a Blog
+                    </h3>
+
+                    <p>
+                        Turn your next idea into a
+                        published story.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="saved.html"
+                    class="feature-card"
+                >
+
+                    <div class="icon">
+                        🔖
+                    </div>
+
+                    <h3>
+                        Saved Stories
+                    </h3>
+
+                    <p>
+                        Read the stories you saved
+                        for later.
+                    </p>
+
+                </a>
+
+
+                <a
+                    href="profile.html"
+                    class="feature-card"
+                >
+
+                    <div class="icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        Update your creator profile
+                        and personal information.
+                    </p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             MY BLOGS
+             ================================================= -->
+
+        <section class="section">
+
+            <div class="section-head">
+
+                <span class="eyebrow">
+                    YOUR CONTENT
+                </span>
+
+                <h2>
+                    My Published Blogs
+                </h2>
+
+            </div>
+
+
+            <div
+                id="myBlogs"
+                class="blog-grid"
+            >
+
+                <div class="loading">
+                    Loading your blogs...
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer>
+
+        <div>
+
+            <b>
+                ✦ BlogSphere
+            </b>
+
+            <span>
+                — Where every story finds its audience.
+            </span>
+
+        </div>
+
+
+        <div>
+            © 2026 BlogSphere
+        </div>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>

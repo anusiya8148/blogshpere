@@ -1,0 +1,335 @@
+const express = require("express");
+const router = express.Router();
+
+const { supabaseAdmin } = require("../config/supabase");
+const authenticate = require("../middleware/auth");
+
+/*
+====================================================
+GET MY SAVED BLOGS
+GET /api/bookmarks/mine
+====================================================
+*/
+router.get("/mine", authenticate, async (req, res) => {
+    try {
+        const { data, error } = await supabaseAdmin
+            .from("bookmarks")
+            .select(`
+                id,
+                created_at,
+                blogs (
+                    *,
+                    profiles (
+                        name,
+                        username,
+                        avatar_url
+                    )
+                )
+            `)
+            .eq("user_id", req.user.id)
+            .order("created_at", {
+                ascending: false
+            });
+
+        if (error) {
+            console.error("Get bookmarks error:", error);
+
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+
+        const blogs = (data || [])
+            .map(item => item.blogs)
+            .filter(Boolean);
+
+        res.json({
+            success: true,
+            blogs
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to fetch saved blogs."
+        });
+    }
+});
+
+
+/*
+====================================================
+CHECK BOOKMARK STATUS
+GET /api/bookmarks/blog/:blogId/status
+====================================================
+*/
+router.get(
+    "/blog/:blogId/status",
+    authenticate,
+    async (req, res) => {
+        try {
+            const blogId = req.params.blogId;
+
+            const {
+                data,
+                error
+            } = await supabaseAdmin
+                .from("bookmarks")
+                .select("id")
+                .eq("blog_id", blogId)
+                .eq("user_id", req.user.id)
+                .maybeSingle();
+
+            if (error) {
+                return res.status(500).json({
+                    success: false,
+                    message: error.message
+                });
+            }
+
+            res.json({
+                success: true,
+                bookmarked: !!data
+            });
+
+        } catch (error) {
+            console.error("Bookmark status error:", error);
+
+            res.status(500).json({
+                success: false,
+                message: "Failed to check bookmark status."
+            });
+        }
+    }
+);
+
+
+/*
+====================================================
+SAVE BLOG
+POST /api/bookmarks/:blogId
+====================================================
+*/
+router.post("/:blogId", authenticate, async (req, res) => {
+    try {
+        const blogId = req.params.blogId;
+
+        /*
+        Check whether blog exists
+        */
+        const {
+            data: blog,
+            error: blogError
+        } = await supabaseAdmin
+            .from("blogs")
+            .select("id")
+            .eq("id", blogId)
+            .maybeSingle();
+
+        if (blogError) {
+            return res.status(500).json({
+                success: false,
+                message: blogError.message
+            });
+        }
+
+        if (!blog) {
+            return res.status(404).json({
+                success: false,
+                message: "Blog not found."
+            });
+        }
+
+        /*
+        Check existing bookmark
+        */
+        const {
+            data: existingBookmark,
+            error: findError
+        } = await supabaseAdmin
+            .from("bookmarks")
+            .select("id")
+            .eq("blog_id", blogId)
+            .eq("user_id", req.user.id)
+            .maybeSingle();
+
+        if (findError) {
+            return res.status(500).json({
+                success: false,
+                message: findError.message
+            });
+        }
+
+        if (existingBookmark) {
+            return res.status(409).json({
+                success: false,
+                message: "Blog is already saved."
+            });
+        }
+
+        /*
+        Create bookmark
+        */
+        const { error } = await supabaseAdmin
+            .from("bookmarks")
+            .insert({
+                blog_id: blogId,
+                user_id: req.user.id
+            });
+
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+
+        res.status(201).json({
+            success: true,
+            bookmarked: true,
+            message: "Blog saved successfully."
+        });
+
+    } catch (error) {
+        console.error("Save bookmark error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to save blog."
+        });
+    }
+});
+
+
+/*
+====================================================
+REMOVE BOOKMARK
+DELETE /api/bookmarks/:blogId
+====================================================
+*/
+router.delete("/:blogId", authenticate, async (req, res) => {
+    try {
+        const blogId = req.params.blogId;
+
+        const { error } = await supabaseAdmin
+            .from("bookmarks")
+            .delete()
+            .eq("blog_id", blogId)
+            .eq("user_id", req.user.id);
+
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+
+        res.json({
+            success: true,
+            bookmarked: false,
+            message: "Bookmark removed."
+        });
+
+    } catch (error) {
+        console.error("Remove bookmark error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to remove bookmark."
+        });
+    }
+});
+
+
+/*
+====================================================
+TOGGLE BOOKMARK
+POST /api/bookmarks/:blogId/toggle
+====================================================
+*/
+router.post("/:blogId/toggle", authenticate, async (req, res) => {
+    try {
+        const blogId = req.params.blogId;
+
+        /*
+        Check current bookmark
+        */
+        const {
+            data: existingBookmark,
+            error: findError
+        } = await supabaseAdmin
+            .from("bookmarks")
+            .select("id")
+            .eq("blog_id", blogId)
+            .eq("user_id", req.user.id)
+            .maybeSingle();
+
+        if (findError) {
+            return res.status(500).json({
+                success: false,
+                message: findError.message
+            });
+        }
+
+        /*
+        Already saved → remove
+        */
+        if (existingBookmark) {
+
+            const { error } = await supabaseAdmin
+                .from("bookmarks")
+                .delete()
+                .eq("id", existingBookmark.id);
+
+            if (error) {
+                return res.status(500).json({
+                    success: false,
+                    message: error.message
+                });
+            }
+
+            return res.json({
+                success: true,
+                bookmarked: false,
+                message: "Bookmark removed."
+            });
+        }
+
+        /*
+        Not saved → save
+        */
+        const { error } = await supabaseAdmin
+            .from("bookmarks")
+            .insert({
+                blog_id: blogId,
+                user_id: req.user.id
+            });
+
+        if (error) {
+            return res.status(500).json({
+                success: false,
+                message: error.message
+            });
+        }
+
+        res.json({
+            success: true,
+            bookmarked: true,
+            message: "Blog saved."
+        });
+
+    } catch (error) {
+        console.error("Toggle bookmark error:", error);
+
+        res.status(500).json({
+            success: false,
+            message: "Failed to update bookmark."
+        });
+    }
+});
+
+
+module.exports = router;

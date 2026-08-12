@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Create your BlogSphere account and start sharing your stories."
+    >
+
+    <title>Create Account | BlogSphere</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <div class="auth-wrap">
+
+            <!-- Logo -->
+
+            <a
+                href="index.html"
+                class="auth-logo"
+            >
+                ✦ BlogSphere
+            </a>
+
+
+            <!-- Register Card -->
+
+            <section class="auth-card">
+
+                <div class="auth-head">
+
+                    <div class="auth-icon">
+                        ✨
+                    </div>
+
+                    <h1>
+                        Create Your Account
+                    </h1>
+
+                    <p>
+                        Join BlogSphere and start sharing your ideas.
+                    </p>
+
+                </div>
+
+
+                <!-- Registration Form -->
+
+                <form
+                    id="registerForm"
+                    novalidate
+                >
+
+                    <!-- Full Name -->
+
+                    <label>
+
+                        Full Name
+
+                        <input
+                            type="text"
+                            id="registerName"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            maxlength="100"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Username -->
+
+                    <label>
+
+                        Username
+
+                        <input
+                            type="text"
+                            id="registerUsername"
+                            name="username"
+                            placeholder="Choose a username"
+                            autocomplete="username"
+                            maxlength="30"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Email -->
+
+                    <label>
+
+                        Email Address
+
+                        <input
+                            type="email"
+                            id="registerEmail"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Password -->
+
+                    <label>
+
+                        Password
+
+                        <input
+                            type="password"
+                            id="registerPassword"
+                            name="password"
+                            placeholder="Create a password"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Confirm Password -->
+
+                    <label>
+
+                        Confirm Password
+
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            name="confirmPassword"
+                            placeholder="Confirm your password"
+                            autocomplete="new-password"
+                            minlength="6"
+                            required
+                        >
+
+                    </label>
+
+
+                    <!-- Terms -->
+
+                    <label
+                        style="
+                            display:flex;
+                            align-items:flex-start;
+                            gap:10px;
+                            font-weight:600;
+                            color:#687086;
+                        "
+                    >
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required
+                            style="
+                                width:18px;
+                                height:18px;
+                                min-height:auto;
+                                margin-top:2px;
+                            "
+                        >
+
+                        <span>
+                            I agree to use BlogSphere responsibly
+                            and respect other creators.
+                        </span>
+
+                    </label>
+
+
+                    <!-- Submit -->
+
+                    <button
+                        type="submit"
+                        class="btn primary full"
+                    >
+                        Create Account 🚀
+                    </button>
+
+                </form>
+
+
+                <!-- Login -->
+
+                <div class="switch">
+
+                    Already have an account?
+
+                    <a href="login.html">
+                        Login
+                    </a>
+
+                </div>
+
+
+                <!-- Back -->
+
+                <a
+                    href="index.html"
+                    class="back"
+                >
+                    ← Back to BlogSphere
+                </a>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- JavaScript -->
+
+    <script
+        src="script.js"
+    ></script>
+
+</body>
+
+</html>
