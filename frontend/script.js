@@ -8,7 +8,7 @@
    CONFIGURATION
    ========================================================= */
 
-const API_BASE_URL = '/api';
+const API_BASE_URL = 'https://blogshpere-uhka.onrender.com/api';
 
 /*
    Replace these with your Supabase project values.
